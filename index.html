@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CathyHub Image Converter – JPG PNG WEBP</title>
+<meta name="description" content="Free online image converter. Convert JPG, PNG and WEBP images quickly and privately in your browser.">
+<meta name="keywords" content="image converter, jpg to png, png to jpg, jpg to webp, png to webp, webp converter">
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f7f4ef;
+  color:#2b2118;
+  min-height:100vh;
+}
+
+header{
+  background:#fff;
+  border-bottom:1px solid #e8dfd5;
+  padding:18px 20px;
+}
+
+.logo{
+  max-width:1100px;
+  margin:auto;
+  font-size:24px;
+  font-weight:800;
+  color:#8b4b20;
+}
+
+.logo span{
+  color:#d49a43;
+}
+
+.container{
+  max-width:900px;
+  margin:40px auto;
+  padding:0 18px;
+}
+
+.hero{
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.hero h1{
+  font-size:38px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  color:#6e6258;
+  font-size:16px;
+}
+
+.converter{
+  background:#fff;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+
+.upload{
+  border:2px dashed #d6b98d;
+  border-radius:16px;
+  padding:42px 20px;
+  text-align:center;
+  background:#fffaf4;
+  cursor:pointer;
+}
+
+.upload:hover{
+  background:#fff6eb;
+}
+
+.upload-icon{
+  font-size:48px;
+  margin-bottom:12px;
+}
+
+.upload h2{
+  font-size:21px;
+  margin-bottom:8px;
+}
+
+.upload p{
+  color:#777;
+  margin-bottom:18px;
+}
+
+input[type=file]{
+  display:none;
+}
+
+.upload-btn{
+  display:inline-block;
+  background:#9b5524;
+  color:white;
+  padding:12px 24px;
+  border-radius:9px;
+  font-weight:bold;
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-top:25px;
+}
+
+.control{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.control label{
+  font-weight:bold;
+}
+
+select,input[type=range]{
+  width:100%;
+}
+
+select{
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:9px;
+  background:white;
+  font-size:15px;
+}
+
+.quality-value{
+  font-size:14px;
+  color:#777;
+}
+
+.file-list{
+  margin-top:25px;
+}
+
+.file-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px;
+  border:1px solid #eee;
+  border-radius:10px;
+  margin-bottom:10px;
+  background:#fafafa;
+}
+
+.file-name{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  flex:1;
+}
+
+.remove{
+  border:none;
+  background:#eee;
+  color:#a33;
+  border-radius:7px;
+  padding:7px 10px;
+  cursor:pointer;
+}
+
+.actions{
+  display:flex;
+  gap:12px;
+  margin-top:25px;
+  flex-wrap:wrap;
+}
+
+button{
+  border:none;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.convert{
+  flex:1;
+  min-width:180px;
+  background:#9b5524;
+  color:#fff;
+  padding:14px 20px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.download-all{
+  flex:1;
+  min-width:180px;
+  background:#2f7d52;
+  color:#fff;
+  padding:14px 20px;
+  border-radius:10px;
+  font-weight:bold;
+  display:none;
+}
+
+.clear{
+  padding:14px 20px;
+  border-radius:10px;
+  background:#eee;
+}
+
+.status{
+  margin-top:18px;
+  text-align:center;
+  color:#666;
+  min-height:22px;
+}
+
+.results{
+  margin-top:25px;
+}
+
+.result-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  background:#f5faf7;
+  border:1px solid #dceee3;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+.result-item a{
+  text-decoration:none;
+  color:#287447;
+  font-weight:bold;
+}
+
+.info{
+  margin-top:25px;
+  padding:20px;
+  border-radius:14px;
+  background:#fff8ed;
+  line-height:1.7;
+}
+
+.info h3{
+  margin-bottom:8px;
+}
+
+footer{
+  text-align:center;
+  padding:30px 15px;
+  color:#777;
+  font-size:14px;
+}
+
+@media(max-width:600px){
+  .hero h1{
+    font-size:29px;
+  }
+
+  .converter{
+    padding:18px;
+  }
+
+  .controls{
+    grid-template-columns:1fr;
+  }
+
+  .upload{
+    padding:30px 15px;
+  }
+
+  .file-item,
+  .result-item{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Cathy<span>Hub</span></div>
+</header>
+
+<div class="container">
+
+<section class="hero">
+  <h1>Free Image Converter</h1>
+  <p>Convert JPG, PNG and WEBP images quickly and privately.</p>
+</section>
+
+<div class="converter">
+
+<label class="upload" for="fileInput">
+  <div class="upload-icon">🖼️</div>
+  <h2>Select Your Images</h2>
+  <p>JPG, PNG or WEBP • Multiple images supported</p>
+  <span class="upload-btn">Choose Images</span>
+</label>
+
+<input
+  id="fileInput"
+  type="file"
+  accept="image/jpeg,image/png,image/webp"
+  multiple
+>
+
+<div class="controls">
+
+  <div class="control">
+    <label for="format">Convert To</label>
+    <select id="format">
+      <option value="image/jpeg">JPG</option>
+      <option value="image/png">PNG</option>
+      <option value="image/webp">WEBP</option>
+    </select>
+  </div>
+
+  <div class="control">
+    <label for="quality">Image Quality</label>
+    <input id="quality" type="range" min="10" max="100" value="90">
+    <div class="quality-value">
+      Quality: <span id="qualityValue">90</span>%
+    </div>
+  </div>
+
+</div>
+
+<div class="file-list" id="fileList"></div>
+
+<div class="actions">
+  <button class="convert" id="convertBtn">
+    Convert Images
+  </button>
+
+  <button class="download-all" id="downloadAllBtn">
+    Download All
+  </button>
+
+  <button class="clear" id="clearBtn">
+    Clear
+  </button>
+</div>
+
+<div class="status" id="status"></div>
+
+<div class="results" id="results"></div>
+
+<div class="info">
+  <h3>🔒 100% Private</h3>
+  <p>
+    Your images are processed directly in your browser.
+    They are not uploaded to a server.
+  </p>
+</div>
+
+</div>
+</div>
+
+<footer>
+  © 2026 CathyHub • Free Online Image Tools
+</footer>
+
+<script>
+
+const fileInput = document.getElementById("fileInput");
+const fileList = document.getElementById("fileList");
+const format = document.getElementById("format");
+const quality = document.getElementById("quality");
+const qualityValue = document.getElementById("qualityValue");
+const convertBtn = document.getElementById("convertBtn");
+const downloadAllBtn = document.getElementById("downloadAllBtn");
+const clearBtn = document.getElementById("clearBtn");
+const status = document.getElementById("status");
+const results = document.getElementById("results");
+
+let files = [];
+let convertedFiles = [];
+
+quality.addEventListener("input", () => {
+  qualityValue.textContent = quality.value;
+});
+
+fileInput.addEventListener("change", () => {
+  files = Array.from(fileInput.files);
+  convertedFiles = [];
+  results.innerHTML = "";
+  downloadAllBtn.style.display = "none";
+  renderFiles();
+});
+
+function renderFiles(){
+
+  fileList.innerHTML = "";
+
+  files.forEach((file,index)=>{
+
+    const div = document.createElement("div");
+    div.className = "file-item";
+
+    div.innerHTML = `
+      <div class="file-name">
+        🖼️ ${escapeHTML(file.name)}
+      </div>
+
+      <div>${formatSize(file.size)}</div>
+
+      <button class="remove" onclick="removeFile(${index})">
+        Remove
+      </button>
+    `;
+
+    fileList.appendChild(div);
+  });
+}
+
+function removeFile(index){
+
+  files.splice(index,1);
+
+  renderFiles();
+
+  if(files.length === 0){
+    fileInput.value = "";
+  }
+}
+
+function formatSize(bytes){
+
+  if(bytes < 1024){
+    return bytes + " B";
+  }
+
+  if(bytes < 1024*1024){
+    return (bytes/1024).toFixed(1) + " KB";
+  }
+
+  return (bytes/(1024*1024)).toFixed(2) + " MB";
+}
+
+function escapeHTML(text){
+
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+convertBtn.addEventListener("click", async ()=>{
+
+  if(files.length === 0){
+
+    status.textContent = "Please select at least one image.";
+
+    return;
+  }
+
+  convertedFiles = [];
+  results.innerHTML = "";
+
+  status.textContent = "Converting images...";
+
+  for(let i=0;i<files.length;i++){
+
+    try{
+
+      const result = await convertImage(files[i]);
+
+      convertedFiles.push(result);
+
+      const resultDiv = document.createElement("div");
+      resultDiv.className = "result-item";
+
+      resultDiv.innerHTML = `
+        <span>✅ ${escapeHTML(result.name)}</span>
+        <a href="${result.url}" download="${result.name}">
+          Download
+        </a>
+      `;
+
+      results.appendChild(resultDiv);
+
+    }catch(error){
+
+      console.error(error);
+
+    }
+  }
+
+  status.textContent =
+    `Conversion complete — ${convertedFiles.length} image(s) ready.`;
+
+  if(convertedFiles.length > 0){
+    downloadAllBtn.style.display = "block";
+  }
+
+});
+
+function convertImage(file){
+
+  return new Promise((resolve,reject)=>{
+
+    const img = new Image();
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+      img.onload = function(){
+
+        const canvas = document.createElement("canvas");
+
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+
+        const ctx = canvas.getContext("2d");
+
+        const selectedFormat = format.value;
+
+        // JPG does not support transparency.
+        if(selectedFormat === "image/jpeg"){
+
+          ctx.fillStyle = "#ffffff";
+
+          ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+        }
+
+        ctx.drawImage(
+          img,
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+        const q = Number(quality.value) / 100;
+
+        canvas.toBlob(
+          blob => {
+
+            if(!blob){
+
+              reject("Conversion failed");
+
+              return;
+            }
+
+            const extension =
+              selectedFormat === "image/jpeg"
+              ? "jpg"
+              : selectedFormat === "image/png"
+              ? "png"
+              : "webp";
+
+            const originalName =
+              file.name.replace(/\.[^/.]+$/, "");
+
+            const newName =
+              originalName + "." + extension;
+
+            const url =
+              URL.createObjectURL(blob);
+
+            resolve({
+              name:newName,
+              url:url,
+              blob:blob
+            });
+
+          },
+          selectedFormat,
+          q
+        );
+
+      };
+
+      img.onerror = () => reject("Invalid image");
+
+      img.src = e.target.result;
+    };
+
+    reader.onerror = () => reject("File reading failed");
+
+    reader.readAsDataURL(file);
+
+  });
+}
+
+downloadAllBtn.addEventListener("click", ()=>{
+
+  convertedFiles.forEach((file,index)=>{
+
+    setTimeout(()=>{
+
+      const a = document.createElement("a");
+
+      a.href = file.url;
+
+      a.download = file.name;
+
+      document.body.appendChild(a);
+
+      a.click();
+
+      a.remove();
+
+    }, index * 300);
+
+  });
+
+});
+
+clearBtn.addEventListener("click", ()=>{
+
+  files = [];
+  convertedFiles = [];
+
+  fileInput.value = "";
+
+  fileList.innerHTML = "";
+  results.innerHTML = "";
+
+  status.textContent = "";
+
+  downloadAllBtn.style.display = "none";
+
+});
+
+</script>
+
+</body>
+</html>
